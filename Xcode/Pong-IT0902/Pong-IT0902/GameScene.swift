@@ -16,11 +16,18 @@ class GameScene: SKScene {
     
     var bottomPaddle: SKSpriteNode?
     var fingerOnBottomPaddle: Bool = false
+    
+    var ball: SKSpriteNode?
        
     override func didMove(to view: SKView) {
         
         topPaddle = childNode(withName: "topPaddle") as? SKSpriteNode
         bottomPaddle = childNode(withName: "bottomPaddle") as? SKSpriteNode
+        
+        ball = childNode(withName: "ball") as? SKSpriteNode
+        ball!.physicsBody = SKPhysicsBody(rectangleOf: ball!.frame.size)
+        
+        // self.physicsWorld.gravity = CGVector(dx: 0.3, dy: 0.3)
         
     }
     
@@ -49,14 +56,26 @@ class GameScene: SKScene {
         let distanceToMove = touchLocation.x - previousTouchLocation.x
         
         if fingerOnTopPaddle && touchLocation.y > 0 {
+            
+            let paddleNewX = topPaddle!.position.x + distanceToMove
+            
+            if (paddleNewX - topPaddle!.size.width / 2) > -(self.size.width / 2) && (paddleNewX + topPaddle!.size.width / 2 < (self.size.width / 2)) {
         
-            topPaddle!.position.x = topPaddle!.position.x + distanceToMove
+                topPaddle!.position.x = paddleNewX
+                
+            }
             
         }
         
         if fingerOnBottomPaddle && touchLocation.y < 0 {
          
-            bottomPaddle!.position.x = bottomPaddle!.position.x + distanceToMove
+            let paddleNewX = bottomPaddle!.position.x + distanceToMove
+            
+            if (paddleNewX - bottomPaddle!.size.width / 2) > -(self.size.width / 2) && (paddleNewX + bottomPaddle!.size.width / 2 < (self.size.width / 2)) {
+            
+                bottomPaddle!.position.x = paddleNewX
+                
+            }
             
         }
                 
