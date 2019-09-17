@@ -22,12 +22,36 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         topPaddle = childNode(withName: "topPaddle") as? SKSpriteNode
+        topPaddle!.physicsBody = SKPhysicsBody(rectangleOf: topPaddle!.frame.size)
+        topPaddle!.physicsBody!.isDynamic = false
+        
         bottomPaddle = childNode(withName: "bottomPaddle") as? SKSpriteNode
+        bottomPaddle!.physicsBody = SKPhysicsBody(rectangleOf: bottomPaddle!.frame.size)
+        bottomPaddle!.physicsBody!.isDynamic = false
         
         ball = childNode(withName: "ball") as? SKSpriteNode
         ball!.physicsBody = SKPhysicsBody(rectangleOf: ball!.frame.size)
+        ball!.physicsBody!.restitution = 1
+        ball!.physicsBody!.friction = 0
+        ball!.physicsBody!.linearDamping = 0
+        ball!.physicsBody!.angularDamping = 0
+        ball!.physicsBody!.allowsRotation = false
         
-        // self.physicsWorld.gravity = CGVector(dx: 0.3, dy: 0.3)
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        
+        // Apply an impulse to the ball
+        ball!.physicsBody!.applyImpulse(CGVector(dx: 10, dy: 10))
+        
+        let topNode = SKNode()
+        let topLeftPoint = CGPoint(x: -(self.size.width / 2), y: self.size.height / 2)
+        let topRightPoint = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        topNode.physicsBody = SKPhysicsBody(edgeFrom: topLeftPoint, to: topRightPoint)
+        
+        let bottomNode = SKNode()
+        let bottomLeftPoint = CGPoint(x: -(self.size.width / 2), y: -(self.size.height / 2))
+        let bottomRightPoint = CGPoint(x: self.size.width / 2, y: -(self.size.height / 2))
+        bottomNode.physicsBody = SKPhysicsBody(edgeFrom: bottomLeftPoint, to: bottomRightPoint)
         
     }
     
