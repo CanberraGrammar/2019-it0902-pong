@@ -22,6 +22,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var fingerOnBottomPaddle: Bool = false
     
     var ball: SKSpriteNode?
+    
+    var gameRunning: Bool = false
        
     override func didMove(to view: SKView) {
         
@@ -46,10 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        
-        // Apply an impulse to the ball
-        ball!.physicsBody!.applyImpulse(CGVector(dx: 10, dy: 10))
-        
+                
         let topNode = SKNode()
         let topLeftPoint = CGPoint(x: -(self.size.width / 2), y: self.size.height / 2)
         let topRightPoint = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
@@ -78,6 +77,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if touchedNode.name == "bottomPaddle" {
             fingerOnBottomPaddle = true
+        }
+        
+        if gameRunning == false {
+            
+            // Apply an impulse to the ball
+            ball!.physicsBody!.applyImpulse(CGVector(dx: 10, dy: 10))
+            
+            gameRunning = true
+            
         }
                 
     }
@@ -128,15 +136,61 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func resetGame() {
+        
+        // Reset the ball - center of the screen
+        ball!.position.x = 0
+        ball!.position.y = 0
+        
+        // Reset the paddles to their original location
+        topPaddle!.position.x = 0
+        bottomPaddle!.position.x = 0
+        
+        // Stop the ball from moving
+        ball!.physicsBody!.isDynamic = false
+        ball!.physicsBody!.isDynamic = true
+        
+        // Alternative way to stop the ball from moving
+        // ball!.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
+        
+        // Unpause the view
+        self.view!.isPaused = false
+        
+    }
+    
+    func gameOver() {
+        
+        // Pause the game
+        self.view!.isPaused = true
+        self.gameRunning = false
+        
+        // Show an alert
+        let gameOverAlert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
+        let gameOverAction = UIAlertAction(title: "Okay", style: .default) { (theAlertAction) in
+            
+            // Reset game
+            self.resetGame()
+            
+        }
+        
+        gameOverAlert.addAction(gameOverAction)
+        
+        self.view!.window!.rootViewController!.present(gameOverAlert, animated: true, completion: nil)
+        
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         
         if (contact.bodyA.categoryBitMask == BottomCategory) || (contact.bodyB.categoryBitMask == BottomCategory) {
             print("Bottom collision")
+            gameOver()
         }
         
         else if (contact.bodyA.categoryBitMask == TopCategory) || (contact.bodyB.categoryBitMask == TopCategory) {
             print("Top collision")
+            gameOver()
         }
+        
         
     }
     
