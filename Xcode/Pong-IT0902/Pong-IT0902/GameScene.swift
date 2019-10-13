@@ -81,8 +81,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if gameRunning == false {
             
-            // Apply an impulse to the ball
-            ball!.physicsBody!.applyImpulse(CGVector(dx: 10, dy: 10))
+            // Generate a random number between 0 and 1 (inclusive)
+            let randomNumber = Int(arc4random_uniform(2))
+            
+            if randomNumber == 0 {
+            
+                // Apply an impulse to the ball
+                ball!.physicsBody!.applyImpulse(CGVector(dx: 10, dy: 10))
+                
+            }
+            
+            else {
+                
+                ball!.physicsBody!.applyImpulse(CGVector(dx: -10, dy: -10))
+                
+            }
             
             gameRunning = true
             
