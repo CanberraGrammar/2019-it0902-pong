@@ -15,6 +15,7 @@
 		D18C585C2325E0BA00D4A968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D18C585A2325E0BA00D4A968 /* Main.storyboard */; };
 		D18C585E2325E0BB00D4A968 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D18C585D2325E0BB00D4A968 /* Assets.xcassets */; };
 		D18C58612325E0BB00D4A968 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D18C585F2325E0BB00D4A968 /* LaunchScreen.storyboard */; };
+		D1AA76B62353FE62002EE2DE /* SmokeEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1AA76B52353FE62002EE2DE /* SmokeEmitter.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D18C585D2325E0BB00D4A968 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D18C58602325E0BB00D4A968 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D18C58622325E0BB00D4A968 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1AA76B52353FE62002EE2DE /* SmokeEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeEmitter.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				D18C585D2325E0BB00D4A968 /* Assets.xcassets */,
 				D18C585F2325E0BB00D4A968 /* LaunchScreen.storyboard */,
 				D18C58622325E0BB00D4A968 /* Info.plist */,
+				D1AA76B52353FE62002EE2DE /* SmokeEmitter.sks */,
 			);
 			path = "Pong-IT0902";
 			sourceTree = "<group>";
@@ -133,6 +136,7 @@
 			files = (
 				D18C585C2325E0BA00D4A968 /* Main.storyboard in Resources */,
 				D18C58532325E0BA00D4A968 /* GameScene.sks in Resources */,
+				D1AA76B62353FE62002EE2DE /* SmokeEmitter.sks in Resources */,
 				D18C585E2325E0BB00D4A968 /* Assets.xcassets in Resources */,
 				D18C58612325E0BB00D4A968 /* LaunchScreen.storyboard in Resources */,
 				D18C58552325E0BA00D4A968 /* Actions.sks in Resources */,
